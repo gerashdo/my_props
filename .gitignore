@@ -1,0 +1,12 @@
+# root files
+*.log
+*.pot
+*.pyc
+__pycache__/
+db.sqlite3
+.env
+media/
+
+# test coverage
+htmlcov/
+.coverage
