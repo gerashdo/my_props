@@ -1,0 +1,26 @@
+{% extends 'base.html' %}
+
+
+{% block title %}
+    Propiedades
+{% endblock title %}
+
+
+{% block body %}
+    
+    {% for property in properties %}
+        <p>{{ property.public_id }}</p>
+        <p>{{ property.title }}</p>
+        <p>{{ property.property_type }}</p>
+        <p>{{ property.location }}</p>
+        <p><img src="{{ property.title_image_thumb }}" alt="Image"></p>
+    {% endfor %}
+    
+    {% if next_page %}
+        <a type="button" href="{% url 'properties:index' page %}">Next page</a>
+    {% endif %}
+        
+        
+{% endblock body %}
+    
+    
