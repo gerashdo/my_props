@@ -17,8 +17,6 @@ class ConnectorProperties(Connector):
             'search': search
         }
 
-        # r = requests.get(self.url_extended, headers=self.headers, params=payload)
-        # print(r.url)
         return requests.get(self.url_extended, params=payload, headers=self.headers)
 
     def get_property(self, property_id):

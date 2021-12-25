@@ -15,3 +15,15 @@ def index(request, page = 1):
     }
 
     return render(request, 'index.html', context)
+
+def show_property(request, id):
+
+    # connector = ConnectorProperties('l7u502p8v46ba3ppgvj5y2aad50lb9')
+    # response = connector.get_property(id)
+    # property = response.json()
+
+    # context = {
+    #     'property': property
+    # }
+
+    return render(request, 'show_property.html')

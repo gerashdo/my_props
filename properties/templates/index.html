@@ -1,26 +1,44 @@
 {% extends 'base.html' %}
-
+{% load static %}
 
 {% block title %}
     Propiedades
 {% endblock title %}
 
-
 {% block body %}
     
-    {% for property in properties %}
-        <p>{{ property.public_id }}</p>
-        <p>{{ property.title }}</p>
-        <p>{{ property.property_type }}</p>
-        <p>{{ property.location }}</p>
-        <p><img src="{{ property.title_image_thumb }}" alt="Image"></p>
-    {% endfor %}
+    <div class="contenedor form-control">
+        <div class="row properties-row">
+        {% for property in properties %}
+            <article class="col-md-3">
+                <div class="card mb-3">
+                    <a href="{% url 'properties:show_property' property.public_id %}">
+
+                        {% if property.title_image_thumb %}
+                            <img src="{{ property.title_image_thumb }}" class="card-img-top" alt="{{ property.title }}">
+                        {% else %}
+                            <img src="{% static 'img/default_house.jpg' %}" class="card-img-top" alt="{{ property.title }}">
+                        {% endif %}
+
+                    </a>
+                    <div class="card-body">
+                        <p class="card-text"><small class="text-muted">{{ property.public_id }}</small></p>
+                        <a href="{% url 'properties:show_property' property.public_id %}"><h5 class="card-title">{{ property.title }}</h5></a>
+                        <p class="card-text">{{ property.location }}</p>
+                        <p class="card-text"><small class="text-muted">{{ property.property_type }}</small></p>
+                    </div>
+                </div>
+            </article>
+        {% endfor %}
+        </div>
+    <div>
     
     {% if next_page %}
-        <a type="button" href="{% url 'properties:index' page %}">Next page</a>
+    <div class="row justify-content-center">
+        <a type="button" class="btn btn-primary" href="{% url 'properties:index' page %}">Next page</a>
+    </div>
     {% endif %}
-        
-        
+          
 {% endblock body %}
     
     
