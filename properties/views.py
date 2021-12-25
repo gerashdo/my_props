@@ -1,5 +1,6 @@
 from django.shortcuts import render
 from django.contrib import messages
+from django.http import Http404
 from properties.classes.ConnectorProperties import ConnectorProperties
 from properties.forms import ContactForm
 from properties.classes.ConnectorContactRequest import ConnectorContactRequest
@@ -27,6 +28,10 @@ def show_property(request, id):
 
     # get the property
     response = connector.get_property(id)
+
+    # verify if the property exists
+    if response.status_code != 200:
+        raise Http404
     property = response.json()
 
     context = {
@@ -75,3 +80,6 @@ def process_contact_request(request, id):
 
     # return an clean form if the request is get or succesful post
     return form
+
+def page_not_found_view(request, exception):
+    return render(request, '404.html', status=404)
