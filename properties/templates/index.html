@@ -8,10 +8,10 @@
 {% block body %}
     
     <div class="contenedor form-control">
-        <div class="row properties-row">
+        <div class="row">
         {% for property in properties %}
-            <article class="col-md-3">
-                <div class="card mb-3">
+            <article class="col-lg-3 col-md-4">
+                <div class="card mb-5">
                     <a href="{% url 'properties:show_property' property.public_id %}">
 
                         {% if property.title_image_thumb %}
@@ -35,7 +35,9 @@
     
     {% if next_page %}
     <div class="row justify-content-center">
-        <a type="button" class="btn btn-primary" href="{% url 'properties:index' page %}">Next page</a>
+        <div class="col-md-3 col-sm-12 text-center">
+            <a type="button" class="btn btn-primary" href="{% url 'properties:index' page %}">Next page</a>
+        </div>
     </div>
     {% endif %}
           
