@@ -6,6 +6,37 @@
 
 
 {% block body %}
-    <h1>Hello world!</h1>
+
+    <div class="contenedor form-control">
+        <div class="card mb-3">
+            <div class="row g-0">
+              <div class="col-md-5">
+                <img src="{{ property_image }}" class="img-fluid rounded-start" alt="...">
+              </div>
+              <div class="col-md-7">
+                <div class="card-body">
+                    <p class="card-text"><small class="text-muted">{{ property.public_id }}</small></p>
+                  <h5 class="card-title">{{ property.title }}</h5>
+                  <p class="card-text">{{ property.description }}</p>
+                  <p class="card-text">{{ property.location.name }}</p>
+                  <p class="card-text"><small class="text-muted">{{ property.property_type }}</small></p>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="row justify-content-center">
+              <h3>Formulario de contacto</h3>
+              <div class="col col-md-12">
+                  <form class="form" method="post">
+                    {% csrf_token %}
+                    {{ form.as_p}}
+                    <div class="text-center">
+                        <button type="submit" class="btn btn-primary">Enviar</button>
+                    </div>
+                  </form>
+              </div>
+          </div>
+    </div>
 {% endblock body %}
     

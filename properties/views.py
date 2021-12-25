@@ -1,5 +1,8 @@
 from django.shortcuts import render
+from django.contrib import messages
 from properties.classes.ConnectorProperties import ConnectorProperties
+from properties.forms import ContactForm
+from properties.classes.ConnectorContactRequest import ConnectorContactRequest
 
 def index(request, page = 1):
 
@@ -17,13 +20,47 @@ def index(request, page = 1):
     return render(request, 'index.html', context)
 
 def show_property(request, id):
+    form = ContactForm()
+    connector = ConnectorProperties('l7u502p8v46ba3ppgvj5y2aad50lb9')
 
-    # connector = ConnectorProperties('l7u502p8v46ba3ppgvj5y2aad50lb9')
-    # response = connector.get_property(id)
-    # property = response.json()
+    process_contact_request(request)
 
-    # context = {
-    #     'property': property
-    # }
+    # get the property
+    response = connector.get_property(id)
+    property = response.json()
 
-    return render(request, 'show_property.html')
+    context = {
+        'property': property,
+        'property_image': property['property_images'][0]['url'],
+        'form': form
+    }
+
+    return render(request, 'show_property.html', context)
+
+def process_contact_request(request):
+
+    # if the request is a POST, we need to process the form data and send the contact request
+    if request.method == 'POST':
+        form = ContactForm(request.POST)
+        if form.is_valid():
+            connector_contact_request = ConnectorContactRequest('l7u502p8v46ba3ppgvj5y2aad50lb9')
+
+            name = form.cleaned_data['name']
+            phone = form.cleaned_data['phone']
+            email = form.cleaned_data['email']
+            message = form.cleaned_data['message']
+
+            response = connector_contact_request.post_contact_request(
+                name = name,
+                phone = phone,
+                email = email,
+                message = message
+                property_id = id,
+                source = 'myprops.com'
+            )
+
+            # set a message even if is successful or not
+            if response.status_code == 200:
+                messages.success(request, 'Tu solicitud ha sido enviada')
+            else:
+                messages.error(request, response.json()['error'])
