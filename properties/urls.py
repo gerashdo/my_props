@@ -6,5 +6,5 @@ app_name = 'properties'
 urlpatterns = [
     path('', views.index, name='index'),
     path('<int:page>', views.index, name='index'),
-    path('/properties/<str:id>', views.show_property, name='show_property'),
+    path('properties/<str:id>', views.show_property, name='show_property'),
 ]
