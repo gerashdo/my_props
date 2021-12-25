@@ -20,10 +20,10 @@ def index(request, page = 1):
     return render(request, 'index.html', context)
 
 def show_property(request, id):
-    form = ContactForm()
     connector = ConnectorProperties('l7u502p8v46ba3ppgvj5y2aad50lb9')
 
-    process_contact_request(request)
+    # get a form deppending on the request method
+    form = process_contact_request(request, id)
 
     # get the property
     response = connector.get_property(id)
@@ -37,7 +37,7 @@ def show_property(request, id):
 
     return render(request, 'show_property.html', context)
 
-def process_contact_request(request):
+def process_contact_request(request, id):
 
     # if the request is a POST, we need to process the form data and send the contact request
     if request.method == 'POST':
@@ -54,13 +54,24 @@ def process_contact_request(request):
                 name = name,
                 phone = phone,
                 email = email,
-                message = message
+                message = message,
                 property_id = id,
                 source = 'myprops.com'
             )
+            print(response.status_code)
 
             # set a message even if is successful or not
+            # if is successful, clean up the form
             if response.status_code == 200:
                 messages.success(request, 'Tu solicitud ha sido enviada')
+                form = ContactForm()
             else:
                 messages.error(request, response.json()['error'])
+        else:
+            # if the form is not valid, set a message and return the form and its data
+            messages.error(request, 'Algunos datos no son válidos')
+    else:
+        form = ContactForm()
+
+    # return an clean form if the request is get or succesful post
+    return form

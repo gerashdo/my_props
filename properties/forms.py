@@ -40,6 +40,6 @@ class ContactForm(forms.Form):
         cleaned_data = super().clean()
         phone = cleaned_data.get('phone')
 
-        if not phone.isdigit():
-            self.add_error('phone', 'El teléfono debe ser numérico')
+        if not phone.isnumeric() or int(phone) < 1000000000:
+            self.add_error('phone', 'El teléfono no es válido')
 
