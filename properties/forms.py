@@ -7,7 +7,7 @@ class ContactForm(forms.Form):
         widget=forms.TextInput(
             attrs={'class':'form-control', 'placeholder':'Escribe tu nombre'}
         ), 
-        min_length=3, 
+        min_length=6, 
         max_length=100
     )
     phone = forms.CharField(
@@ -40,6 +40,6 @@ class ContactForm(forms.Form):
         cleaned_data = super().clean()
         phone = cleaned_data.get('phone')
 
-        if not phone.isnumeric() or int(phone) < 1000000000:
+        if not phone.isnumeric() or int(phone) < 1000000000 or int(phone) > 9999999999:
             self.add_error('phone', 'El teléfono no es válido')
 
