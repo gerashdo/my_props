@@ -29,11 +29,11 @@ class TestViews(TestCase):
 
     def test_last_properties_page_shoul_not_have_next_page_link(self):
         response = self.client.get('/28')
-        self.assertNotContains(response, 'Next page')
+        self.assertNotContains(response, 'Página siguiente')
 
     def test_first_properties_page_shoul_have_next_page_link(self):
         response = self.client.get('/')
-        self.assertContains(response, 'Next page')
+        self.assertContains(response, 'Página siguiente')
     
     def test_first_properties_page_should_have_15_image_tags(self):
         response = self.client.get('/')
