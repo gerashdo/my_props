@@ -1,4 +1,5 @@
 {% extends 'base.html' %}
+{% load static %}
   
 {% block title %}
     Propiedad
@@ -11,7 +12,12 @@
         <div class="card mb-3">
             <div class="row g-0">
               <div class="col-md-5">
-                <img src="{{ property_image }}" class="img-fluid rounded-start" alt="...">
+                
+                {% if property_image %}
+                    <img src="{{ property_image }}" class="img-fluid rounded-start" alt="Foto de la propiedad">
+                {% else %}
+                    <img src="{% static 'img/default_house.jpg' %}" class="img-fluid rounded-start" alt="La propiedad no tiene fotos">
+                {% endif %}
               </div>
               <div class="col-md-7">
                 <div class="card-body">

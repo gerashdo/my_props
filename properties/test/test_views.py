@@ -54,6 +54,10 @@ class TestViews(TestCase):
         response = self.client.get('/properties/EB-XXXXX')
         self.assertEqual(response.status_code, 404)
 
+    def test_should_show_default_hause_image_if_property_has_no_one(self):
+        response = self.client.get('/properties/EB-C0118')
+        self.assertContains(response, '<img src="/static/img/default_house.jpg"')
+
 # tests for process_contact_request view
 
     def test_contact_request_succesful_post(self):

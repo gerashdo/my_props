@@ -1,3 +1,4 @@
+import os
 from django.shortcuts import render
 from django.contrib import messages
 from django.http import Http404
@@ -5,9 +6,11 @@ from properties.classes.ConnectorProperties import ConnectorProperties
 from properties.forms import ContactForm
 from properties.classes.ConnectorContactRequest import ConnectorContactRequest
 
+connector = ConnectorProperties(os.environ.get('API_KEY',))
+connector_contact_request = ConnectorContactRequest(os.environ.get('API_KEY',))
+
 def index(request, page = 1):
 
-    connector = ConnectorProperties('l7u502p8v46ba3ppgvj5y2aad50lb9')
     response = connector.get_properties_page(page = page, limit = 15, statuses = ['published'])
     properties = response.json()['content']
     nextPage = response.json()['pagination']['next_page']
@@ -21,7 +24,6 @@ def index(request, page = 1):
     return render(request, 'index.html', context)
 
 def show_property(request, id):
-    connector = ConnectorProperties('l7u502p8v46ba3ppgvj5y2aad50lb9')
 
     # get a form deppending on the request method
     form = process_contact_request(request, id)
@@ -34,9 +36,15 @@ def show_property(request, id):
         raise Http404
     property = response.json()
 
+    # verify if the property has images
+    if len(property['property_images']) > 0:
+        property_image = property['property_images'][0]['url']
+    else:
+        property_image = ''
+
     context = {
         'property': property,
-        'property_image': property['property_images'][0]['url'],
+        'property_image': property_image,
         'form': form
     }
 
@@ -48,7 +56,6 @@ def process_contact_request(request, id):
     if request.method == 'POST':
         form = ContactForm(request.POST)
         if form.is_valid():
-            connector_contact_request = ConnectorContactRequest('l7u502p8v46ba3ppgvj5y2aad50lb9')
 
             name = form.cleaned_data['name']
             phone = form.cleaned_data['phone']
