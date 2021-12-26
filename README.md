@@ -82,12 +82,12 @@ Lo cual debe de mostrar la página index.
 
 
 ## Notas
-- Anteriormente no habia constuido clases aparte de las que ya define el framework de Django en su arquitectura MVT, por lo cual definí las clases conectores específicas para properties y contact requests, para en un futuro crear conectores para locations y MLS properties. Decidí realizar herencia para que sea más fácil de mantener si en algun momento se modifica la url base.
-- Para construir el sitio tuve que investigar un poco cómo se consume una API utilizando python y Django, aunque sabia la teoría, algunos detalles, librerias entre otras, no los tenia muy claros por lo que me llevó un poco más de tiempo del pensado.
-- En el archivo views de la aplicacion properties, la funcion process_contact_request terminó muy grandea mi consideración, analizando un poco más seguramente se puede hacer mas refactoring.
-- En cuanto a la interfaz gráfica hay mucho por mejorar en los estilos, agregar mas funcionamiento como un boton para página anterior, carousel para las fotos de la propiedad, mapa de la ubicación, etc., decidí utilizar boostrap para no hacer el css de 0 y tener algo presentable de manera rápida.
+- Anteriormente no habia construido clases aparte de las que ya define el framework Django en su arquitectura MVT, por lo cual definí las clases conectores específicas para properties y contact requests, en un futuro se podrían crear conectores para locations y MLS properties. Decidí realizar herencia para facilitar el mantener si en algun momento se modifica la url base.
+- Para construir el sitio tuve que investigar un poco cómo se consume una API utilizando python y Django, aunque sabia la teoría, algunos detalles como librerias, no los tenia muy claros por lo que me llevó un poco más de tiempo del pensado.
+- En el archivo views de la aplicacion properties, la funcion process_contact_request terminó muy grande a mi consideración, analizando un poco seguramente se puede hacer mas refactoring.
+- En cuanto a la interfaz gráfica hay mucho por mejorar en los estilos, agregar más funcionamiento como un botón para página anterior, carousel para las fotos de la propiedad, mapa de la ubicación, etc., decidí utilizar boostrap para no hacer el css de 0 y tener algo presentable de manera rápida.
 - Para este sitio que solamente consume una API creo que era más conveniente usar un framework no tan pesado, pensé en usar Flask pero por falta de experiencia en él decidí realizarlo en Django.
-- Al final siento que es una buen sitio web básico, intenté tener la mayor parte testeado, aunque no asegura que esté lobre de defectos.
+- Al final siento que es una buen sitio web básico, intenté tener la mayor parte testeado, aunque no asegura que esté líbre de bugs.
 
 ### Correr coverage
 
