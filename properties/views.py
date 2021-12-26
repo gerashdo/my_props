@@ -70,7 +70,6 @@ def process_contact_request(request, id):
                 property_id = id,
                 source = 'myprops.com'
             )
-            print(response.status_code)
 
             # set a message even if is successful or not
             # if is successful, clean up the form

@@ -17,9 +17,9 @@ Una vez instalado pip instalamos la herramienta virtualenv:
 ```shell
    $ sudo pip install virtualenv
    ```
-Despues creamos el nuevo entorno virtual y lo activamos:
+Despues creamos el nuevo entorno virtual en el directorio home y lo activamos:
 ```shell
-   $ cd .
+   $ cd ~
 
    $ virtualenv env_myprops
 
@@ -37,7 +37,7 @@ Nos movemos al directorio donde vamos a almacenar el proyecto, una vez ahí ejec
 
    $ cd my_props/
    ```
-
+> En caso de algun problema descargar la rama main como zip e ingresar a la carpeta ya descomprimida.
 - Instalar dependencias con archivo requirements.
 Dentro de la carpeta raíz tenemos un archivo llamado requirements.txt el cual contiene todas las dependencias que necesita el proyecto para correr, ejecutamos la siguiente linea:
 ```shell
@@ -46,7 +46,7 @@ Dentro de la carpeta raíz tenemos un archivo llamado requirements.txt el cual c
 Dicha linea instalará todo lo necesario.
 
 - Establecer la SECRET KEY del proyecto así como el API KEY para el api del stage de EasyBroker.
-Crear una copia del archivo .env.sample y renombrarlo a .env, entro del archivo escribir el Secret key y API KEY:
+Crear una copia del archivo __.env.sample__ y renombrarlo a __.env__, entro del archivo escribir el Secret key y API KEY:
 ```sh
     export SECRET_KEY="ejemplosecretkey"
     export API_KEY="ejmplodeapikey"
@@ -86,6 +86,7 @@ Lo cual debe de mostrar la página index.
 - Para construir el sitio tuve que investigar un poco cómo se consume una API utilizando python y Django, aunque sabia la teoría, algunos detalles, librerias entre otras, no los tenia muy claros por lo que me llevó un poco más de tiempo del pensado.
 - En el archivo views de la aplicacion properties, la funcion process_contact_request terminó muy grandea mi consideración, analizando un poco más seguramente se puede hacer mas refactoring.
 - En cuanto a la interfaz gráfica hay mucho por mejorar en los estilos, agregar mas funcionamiento como un boton para página anterior, carousel para las fotos de la propiedad, mapa de la ubicación, etc., decidí utilizar boostrap para no hacer el css de 0 y tener algo presentable de manera rápida.
+- Para este sitio que solamente consume una API creo que era más conveniente usar un framework no tan pesado, pensé en usar Flask pero por falta de experiencia en él decidí realizarlo en Django.
 - Al final siento que es una buen sitio web básico, intenté tener la mayor parte testeado, aunque no asegura que esté lobre de defectos.
 
 ### Correr coverage
