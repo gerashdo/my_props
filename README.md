@@ -87,7 +87,6 @@ Lo cual debe de mostrar la página index.
 - En el archivo views de la aplicacion properties, la funcion process_contact_request terminó muy grandea mi consideración, analizando un poco más seguramente se puede hacer mas refactoring.
 - En cuanto a la interfaz gráfica hay mucho por mejorar en los estilos, agregar mas funcionamiento como un boton para página anterior, carousel para las fotos de la propiedad, mapa de la ubicación, etc., decidí utilizar boostrap para no hacer el css de 0 y tener algo presentable de manera rápida.
 - Al final siento que es una buen sitio web básico, intenté tener la mayor parte testeado, aunque no asegura que esté lobre de defectos.
-> Las instrucciones escritas son para sistemas linux.
 
 ### Correr coverage
 
